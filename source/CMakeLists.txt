@@ -17,6 +17,10 @@ set(sources
     "m3_parse.c"
 )
 
+if(M3_USE_EXTENSIONS)
+    set(sources ${sources} "extensions/m3_extensions.c")
+endif()
+
 add_library(m3 STATIC ${sources})
 
 target_include_directories(m3 PUBLIC .)
@@ -50,9 +54,13 @@ endif()
 
 if(BUILD_WASI MATCHES "simple")
     target_compile_definitions(m3 PUBLIC d_m3HasWASI)
+    target_link_libraries(m3 m)
 elseif(BUILD_WASI MATCHES "metawasi")
     target_compile_definitions(m3 PUBLIC d_m3HasMetaWASI)
+    target_link_libraries(m3 m)
 elseif(BUILD_WASI MATCHES "uvwasi")
     target_compile_definitions(m3 PUBLIC d_m3HasUVWASI)
     include_directories("${libuv_SOURCE_DIR}/include")
+    target_link_libraries(m3 m)
 endif()
+
