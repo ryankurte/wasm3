@@ -127,7 +127,13 @@ elseif(WASIENV)
   # https://www.mail-archive.com/llvm-bugs@lists.llvm.org/msg36273.html
 
   #-flto -Wl,--lto-O3
-  set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -Wl,-z,stack-size=8388608")
+  # NOTE: apple clang seems to expect different stack size specification to other compilers, 
+  # unclear atm whether this applies to non-apple clang too
+  if(APPLE AND (CMAKE_C_COMPILER_ID MATCHES "Clang"))
+    set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -Wl,-stack_size -Wl,0x800000")
+  else()
+    set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -Wl,-z,stack-size=8388608")
+  endif()
 
 elseif(WIN32 AND NOT MINGW)
 
