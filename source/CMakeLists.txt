@@ -21,6 +21,7 @@ if(M3_USE_EXTENSIONS)
 endif()
 
 add_library(m3 STATIC ${sources})
+target_link_libraries(m3 m)
 
 target_include_directories(m3 PUBLIC .)
 
