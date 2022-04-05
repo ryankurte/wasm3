@@ -139,7 +139,7 @@ namespace wasm3 {
 
     /** @cond */
     namespace detail {
-        void check_error(M3Result err) {
+        static inline void check_error(M3Result err) {
             if (err != m3Err_none) {
                 throw error(err);
             }
@@ -344,25 +344,21 @@ namespace wasm3 {
          *
          * Note that the type of the return value must be explicitly specified as a template argument.
          *
-         * @return the return value of the function.
+         * @return the return value of the function or void.
          */
-        template<typename Ret, typename ... Args>
+        template<typename Ret = void, typename ... Args>
         Ret call(Args... args) {
             const void *arg_ptrs[] = { reinterpret_cast<const void*>(&args)... };
             M3Result res = m3_Call(m_func, sizeof...(args), arg_ptrs);
             detail::check_error(res);
-            Ret ret;
-            const void* ret_ptrs[] = { &ret };
-            res = m3_GetResults(m_func, 1, ret_ptrs);
-            detail::check_error(res);
-            return ret;
-        }
 
-        template<typename ... Args>
-        void call(Args... args) {
-            const void *arg_ptrs[] = { reinterpret_cast<const void*>(&args)... };
-            M3Result res = m3_Call(m_func, sizeof...(args), arg_ptrs);
-            detail::check_error(res);
+            if constexpr (!std::is_void<Ret>::value) {
+                Ret ret;
+                const void* ret_ptrs[] = { &ret };
+                res = m3_GetResults(m_func, 1, ret_ptrs);
+                detail::check_error(res);
+                return ret; 
+            }
         }
 
     protected:
@@ -378,23 +374,23 @@ namespace wasm3 {
         M3Function *m_func = nullptr;
     };
 
-    runtime environment::new_runtime(size_t stack_size_bytes) {
+    inline runtime environment::new_runtime(size_t stack_size_bytes) {
         return runtime(m_env, stack_size_bytes);
     }
 
-    module environment::parse_module(std::istream &in) {
+    inline module environment::parse_module(std::istream &in) {
         return module(m_env, in);
     }
 
-    module environment::parse_module(const uint8_t *data, size_t size) {
+    inline module environment::parse_module(const uint8_t *data, size_t size) {
         return module(m_env, data, size);
     }
 
-    void runtime::load(module &mod) {
+    inline void runtime::load(module &mod) {
         mod.load_into(m_runtime.get());
     }
 
-    function runtime::find_function(const char *name) {
+    inline function runtime::find_function(const char *name) {
         return function(m_runtime, name);
     }
 

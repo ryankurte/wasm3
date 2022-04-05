@@ -1,3 +1,5 @@
+[![SWUbanner](https://raw.githubusercontent.com/vshymanskyy/StandWithUkraine/main/banner-direct.svg)](https://vshymanskyy.github.io/StandWithUkraine)
+
 <img align="right" width="30%" src="/extra/screenshot-ios.png">
 
 # <img src="/extra/wasm-symbol.svg" width="32" height="32" /> Wasm3
@@ -33,10 +35,10 @@ Wasm3 can also be used as a library for:
 [<img src="https://cdn.rawgit.com/simple-icons/simple-icons/develop/icons/rust.svg" width="18" height="18" /> Rust](https://github.com/Veykril/wasm3-rs) │ 
 [<img src="https://cdn.rawgit.com/simple-icons/simple-icons/develop/icons/cplusplus.svg" width="18" height="18" /> C/C++](https://github.com/wasm3/wasm3) │ 
 [<img src="https://cdn.rawgit.com/simple-icons/simple-icons/develop/icons/go.svg" width="18" height="18" /> GoLang](https://github.com/matiasinsaurralde/go-wasm3) │ 
-[　 Zig](https://github.com/alichay/zig-wasm3)  
+[<img src="https://cdn.rawgit.com/simple-icons/simple-icons/develop/icons/zig.svg" width="18" height="18" /> Zig](https://github.com/alichay/zig-wasm3)  
 [<img src="https://cdn.rawgit.com/simple-icons/simple-icons/develop/icons/swift.svg" width="18" height="18" /> Swift](https://github.com/shareup/wasm-interpreter-apple) │ 
 [<img src="https://cdn.rawgit.com/simple-icons/simple-icons/develop/icons/dotnet.svg" width="18" height="18" /> .Net](https://github.com/tana/Wasm3DotNet) │ 
-[<img src="https://cdn.rawgit.com/simple-icons/simple-icons/develop/icons/arduino.svg" width="18" height="18" /> Arduino, PlatformIO, Particle](https://github.com/wasm3/wasm3-arduino)
+[<img src="https://cdn.rawgit.com/simple-icons/simple-icons/develop/icons/arduino.svg" width="18" height="18" /> Arduino, PlatformIO, Particle](https://github.com/wasm3/wasm3-arduino) │ [QuickJS](https://github.com/saghul/txiki.js)
 
 
 ## Status
@@ -58,19 +60,20 @@ Minimum useful system requirements: **~64Kb** for code and **~10Kb** RAM
 - <img src="https://cdn.rawgit.com/simple-icons/simple-icons/develop/icons/firefoxbrowser.svg" width="18" height="18" /> Browsers. Yes, using WebAssembly itself!
 - <img src="extra/wasm-symbol.svg" width="18" height="18" /> `wasm3` can execute `wasm3` (self-hosting)
 
-## Advanced features and [post-mvp proposals](https://github.com/WebAssembly/proposals) support
+## Features
 
-☑ Sign-extension operators  
-☑ Non-trapping float-to-int conversions  
-☑ Import/Export of Mutable Globals  
-☑ Structured execution tracing  
-☑ Big-Endian systems support  
-☑ Self-hosting  
-☑ Gas metering  
-☑ Multi-value  
-☐ Reference types  
-☐ Bulk memory operations  
-☐ Tail call optimization  
+| Webassembly [Core Proposals][WasmProps]  | Extra |
+| --- | --- |
+| ☑ Import/Export of Mutable Globals           | ☑ Structured execution tracing     |
+| ☑ Non-trapping float-to-int conversions      | ☑ Big-Endian systems support       |
+| ☑ Sign-extension operators                   | ☑ Wasm and WASI self-hosting       |
+| ☑ Multi-value                                | ☑ Gas metering                     |
+| ☑ Bulk memory operations (partial support)   | ☑ Linear memory limit (< 64KiB)    |
+| ☐ Multiple memories                          |
+| ☐ Reference types                            |
+| ☐ Tail call optimization                     |
+| ☐ Fixed-width SIMD                           |
+| ☐ Exception handling                         |
 
 ## Motivation
 
@@ -90,10 +93,9 @@ Wasm3 started as a research project and remains so by many means. Evaluating the
 [<img src="/extra/blynk.png" height="32" />](https://blynk.io/)　
 [<img src="/extra/iden3.svg" height="32" />](https://www.iden3.io/)　
 [<img src="https://user-images.githubusercontent.com/1506708/114701856-069ce700-9d2c-11eb-9b72-9ce2dfd9f0fb.png" height="32" />](https://github.com/kateinoigakukun/wasmic-ios)　
-[<img src="https://www.balena.io/blog/content/images/2018/10/balena_logo.png" height="32" />](https://github.com/balena-io-playground/balena-wasm3)　
+[<img src="https://www.balena.io/avatar.png" height="32" />](https://github.com/balena-io-playground/balena-wasm3)　
 [<img src="https://krustlet.dev/images/horizontal.svg" height="32" />](https://github.com/deislabs/krustlet-wasm3)　
-[<img src="/extra/shareup_app.svg" height="24" />](https://shareup.app/blog/introducing-shareup/)　
-[<img src="/extra/txiki_js.png" height="32" />](https://github.com/saghul/txiki.js)　
+[<img src="/extra/shareup_app.svg" height="24" />](https://shareup.app/blog/introducing-shareup/)
 
 ## Further Resources
 
@@ -111,3 +113,6 @@ Wasm3 started as a research project and remains so by many means. Evaluating the
 
 ### License
 This project is released under The MIT License (MIT)
+
+
+[WasmProps]: https://github.com/WebAssembly/proposals/blob/master/finished-proposals.md  "WebAssembly Finished Proposals"
