@@ -34,6 +34,7 @@ else()
     if (WASIENV)
         # FIXME: declaration of 'struct sigaction' will not be visible outside of this function
         target_compile_options(m3 PUBLIC -Wno-visibility)
+        target_link_libraries(m3 m)
         # FIXME incompatible pointer types passing 'u32 *' to parameter of type 'char **'
         set_source_files_properties(m3_api_meta_wasi.c PROPERTIES COMPILE_FLAGS -Wno-incompatible-pointer-types)
     endif()
